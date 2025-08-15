@@ -1,7 +1,7 @@
-# 🇵🇭 Philippine SMS Sender
+# Philippine SMS Sender
 
-A simple web interface for sending SMS messages to Philippine mobile numbers using the [TextBee SMS Gateway
+A simple web interface for sending SMS messages to Philippine mobile numbers
 
 ## Philippine Mobile Networks Supported
 
-- **All other PH networks**: Just use the 09xxxxxxxxx format
+-  Just use the 09xxxxxxxxx format
