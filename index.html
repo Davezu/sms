@@ -13,7 +13,7 @@
 
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: linear-gradient(135deg, #667eea 0%, #4b55a2 100%);
             min-height: 100vh;
             display: flex;
             align-items: center;
@@ -78,7 +78,7 @@
         .send-btn {
             width: 100%;
             padding: 15px;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: linear-gradient(135deg, #667eea 0%, #6079e9 100%);
             color: white;
             border: none;
             border-radius: 10px;
@@ -146,20 +146,14 @@
 </head>
 <body>
     <div class="container">
-        <h1>🇵🇭 Philippine SMS Sender</h1>
-        
-        <div class="info-box">
-            <h3>✅ Ready to Send SMS!</h3>
-            <p><strong>Device ID:</strong> 689b062c16aabe68071a32f8 (pre-configured)</p>
-            <p><strong>🇵🇭 Philippine SMS:</strong> Just enter the mobile number and message below!</p>
-        </div>
+        <h1>Free text for PH numbers</h1>
 
         <form id="smsForm">
             <div class="form-group">
                 <label for="phoneNumber">Philippine Mobile Number</label>
-                <input type="tel" id="phoneNumber" placeholder="09171234567" required maxlength="11">
+                <input type="tel" id="phoneNumber" placeholder="Ex: 09171234567" required maxlength="11">
                 <small style="color: #666; font-size: 12px; margin-top: 5px; display: block;">
-                    🇵🇭 Enter Philippine mobile: 09171234567, 09181234567, etc.
+                    Enter your mobile: 09171234567, 09181234567, etc.
                 </small>
                 <div id="phonePreview" style="font-size: 12px; margin-top: 5px; color: #4CAF50; display: none;">
                     Will send to: <span id="formattedNumber"></span>
@@ -175,14 +169,14 @@
             </div>
 
             <button type="submit" class="send-btn" id="sendBtn">
-                📤 Send SMS
+                Send Message
             </button>
         </form>
 
         <div id="response" class="response"></div>
 
         <div class="api-info">
-            Powered by <a href="https://textbee.dev" target="_blank" style="color: #667eea;">TextBee</a> SMS Gateway
+           Follow me on Github <a href="https://github.com/Davezu" target="_blank" style="color: #667eea;">Davezu</a> For more projects.
         </div>
     </div>
 
@@ -210,7 +204,6 @@
             }
         });
 
-        // Form submission
         document.getElementById('smsForm').addEventListener('submit', async function(e) {
             e.preventDefault();
             
@@ -219,13 +212,11 @@
             const sendBtn = document.getElementById('sendBtn');
             const response = document.getElementById('response');
 
-            // Validation
             if (!phoneNumber || !message) {
                 showResponse('Please fill in all fields.', 'error');
                 return;
             }
 
-            // Format Philippine mobile number for API
             let formattedPhone = phoneNumber;
             if (formattedPhone.startsWith('09') && formattedPhone.length === 11) {
                 formattedPhone = '+63' + formattedPhone.substring(1);
@@ -234,7 +225,6 @@
                 return;
             }
 
-            // Disable button and show loading
             sendBtn.disabled = true;
             sendBtn.textContent = '⏳ Sending...';
 
@@ -283,7 +273,6 @@
             response.className = `response ${type}`;
             response.style.display = 'block';
             
-            // Auto-hide success messages after 5 seconds
             if (type === 'success') {
                 setTimeout(() => {
                     response.style.display = 'none';
@@ -291,24 +280,19 @@
             }
         }
 
-        // Philippine phone number formatting and validation
         document.getElementById('phoneNumber').addEventListener('input', function(e) {
             let value = e.target.value.replace(/\D/g, '');
             const phonePreview = document.getElementById('phonePreview');
             const formattedNumber = document.getElementById('formattedNumber');
             
-            // Limit to 11 digits max
             if (value.length > 11) {
                 value = value.substring(0, 11);
             }
             
-            // Format as Philippine mobile number
             if (value.startsWith('09') && value.length >= 10) {
-                // Keep the 09 format for display
                 e.target.value = value;
                 
                 if (value.length === 11) {
-                    // Show preview of international format
                     const international = '+63' + value.substring(1);
                     formattedNumber.textContent = international;
                     phonePreview.style.display = 'block';
@@ -316,7 +300,6 @@
                     phonePreview.style.display = 'none';
                 }
             } else if (value.startsWith('9') && value.length >= 9 && !value.startsWith('09')) {
-                // Auto-add 0 if they start with 9
                 value = '0' + value;
                 if (value.length <= 11) {
                     e.target.value = value;
