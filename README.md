@@ -1,4 +1,4 @@
-# Philippine SMS Sender
+# Send free text messages to the Philippines
 
 A simple web interface for sending SMS messages to Philippine mobile numbers
 
